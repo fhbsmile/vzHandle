@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<!--default client setting -->
+	<property name="APP_USER_HOME" value="./" />
+	<property name="IMFLOG_SIZE" value="50MB" />
+	
+	<appender name="all_Rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${APP_USER_HOME}/logs/all.txt</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${APP_USER_HOME}/logs/all-%d{yyyy-MM-dd}-%i.zip</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>${IMFLOG_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+		<appender name="vz_all_Rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${APP_USER_HOME}/logs/vz.txt</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${APP_USER_HOME}/logs/vz-%d{yyyy-MM-dd}-%i.zip</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>${IMFLOG_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+  <appender name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned by default the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+   	 	<logger name="com.tsystems.si.aviation.imf.vzHandle" level="INFO">
+ 		<appender-ref ref="vz_all_Rolling" />
+ 	</logger>
+ 	
+ 	
+  <root level="debug">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="all_Rolling" />
+  </root>
+
+</configuration>
+

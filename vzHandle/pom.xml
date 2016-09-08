@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.tsystems.si.aviation.imf</groupId>
+	<artifactId>vzHandle</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>vzHandle</name>
+	<description>VZ project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+	
+    <druid.version>1.0.13</druid.version>
+    <fastjson.version>1.2.7</fastjson.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+      </dependency>
+      		<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-core</artifactId>
+	<version>4.3.10.Final</version>
+	
+</dependency>
+		<dependency>
+	<groupId>com.alibaba</groupId>
+	<artifactId>fastjson</artifactId>
+	<version>${fastjson.version}</version>
+</dependency>
+		
+      <dependency>
+	<groupId>com.alibaba</groupId>
+	<artifactId>druid</artifactId>
+	<version>${druid.version}</version>
+</dependency>
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		
+		<dependency>
+	<groupId>org.aspectj</groupId>
+	<artifactId>aspectjweaver</artifactId>
+</dependency>
+<dependency>
+	<groupId>jaxen</groupId>
+	<artifactId>jaxen</artifactId>
+</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		
+		
+		<dependency>
+        <groupId>CL3Export</groupId>
+        <artifactId>CL3Export</artifactId>
+        <version>1.0.0</version>
+		<scope>system</scope>
+        <systemPath>${project.basedir}/lib/CL3Export.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>CL3Nonexport</groupId>
+        <artifactId>CL3Nonexport</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/CL3Nonexport.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.commonservices</groupId>
+        <artifactId>com.ibm.mq.commonservices</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.commonservices.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.headers</groupId>
+        <artifactId>com.ibm.mq.headers</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.headers.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq</groupId>
+        <artifactId>com.ibm.mq</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.jmqi</groupId>
+        <artifactId>com.ibm.mq.jmqi</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.jmqi.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.jms.Nojndi</groupId>
+        <artifactId>com.ibm.mq.jms.Nojndi</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.jms.Nojndi.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.pcf</groupId>
+        <artifactId>com.ibm.mq.pcf</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.pcf.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.soap</groupId>
+        <artifactId>com.ibm.mq.soap</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.soap.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mq.tools.ras</groupId>
+        <artifactId>com.ibm.mq.tools.ras</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mq.tools.ras.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.ibm.mqjms</groupId>
+        <artifactId>com.ibm.mqjms</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/com.ibm.mqjms.jar</systemPath>
+    </dependency>
+
+    <dependency>
+        <groupId>connector</groupId>
+        <artifactId>connector</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/connector.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>dhbcore</groupId>
+        <artifactId>dhbcore</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/dhbcore.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>fscontext</groupId>
+        <artifactId>fscontext</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/fscontext.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>jms</groupId>
+        <artifactId>jms</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/jms.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>jndi</groupId>
+        <artifactId>jndi</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/jndi.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>jta</groupId>
+        <artifactId>jta</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/jta.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>ldap</groupId>
+        <artifactId>ldap</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/ldap.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>providerutil</groupId>
+        <artifactId>providerutil</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/providerutil.jar</systemPath>
+    </dependency>
+        <dependency>
+        <groupId>rmm</groupId>
+        <artifactId>rmm</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/rmm.jar</systemPath>
+    </dependency>
+        <dependency>
+        <groupId>Imf_2.0.5</groupId>
+        <artifactId>Imf_2.0.5</artifactId>
+        <version>1.0.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/Imf_2.0.5.jar</systemPath>
+    </dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
