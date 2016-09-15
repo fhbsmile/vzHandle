@@ -244,8 +244,16 @@ public class VzFlightMessageOperator {
 					comments.append("Update ATOTout:").append(depStopActualTakeOffDateTimeString).append(System.lineSeparator());
 					comments.append("Update ELDT:").append(arrStopEstimatedLandingDateTimeString).append(System.lineSeparator());
 					fxbean.setActualPreviousAirportDepartureDateTime(depStopActualTakeOffDateTime);
-					fxbean.setEstimatedLandingDateTime(arrStopEstimatedLandingDateTime);
-					fxbean.setXmlStatus(vzHandle.getStatusMod());
+					
+					if(depStopActualTakeOffDateTime!=null){
+						if(arrStopEstimatedLandingDateTime!=null && arrStopEstimatedLandingDateTime.after(new Date())){
+							fxbean.setEstimatedLandingDateTime(arrStopEstimatedLandingDateTime);
+						}
+						fxbean.setXmlStatus(vzHandle.getStatusMod());
+					}else{
+						fxbean.setXmlStatus("N");
+					}
+					
 					xmlMessage =vzHandle.createImfMessage(fxbean);
 					
 				}else if(status.equalsIgnoreCase("ARR")){
