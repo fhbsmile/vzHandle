@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 import com.tsystems.si.aviation.imf.vzHandle.db.bean.ImfMessage;
 import com.tsystems.si.aviation.imf.vzHandle.handles.Handle;
 import com.tsystems.si.aviation.imf.vzHandle.handles.tools.FlightXmlBean;
+import com.tsystems.si.aviation.imf.vzHandle.handles.tools.RemoveEmptyTransformer2;
 import com.tsystems.si.aviation.imf.vzHandle.handles.tools.SequenceGenerator;
 import com.tsystems.si.aviation.imf.vzHandle.handles.tools.TelexConstant;
 import com.tsystems.si.aviation.imf.vzHandle.handles.tools.TimeHandle;
@@ -77,7 +78,7 @@ public class VzHandle implements Handle {
 	protected String  templateXML;
 	protected String  filterXSL;
 	protected Transformer transformer;
-	
+	protected RemoveEmptyTransformer2 removeEmptyTransformer2 = new RemoveEmptyTransformer2();
 	
 	/* (non-Javadoc)
 	 * @see com.tsystems.si.aviation.imf.messageHandle.handles.Handle#initHandle()
@@ -130,10 +131,11 @@ public class VzHandle implements Handle {
 					e.printStackTrace();
 					System.exit(0);
 				}
+				
 		}else{
 			logger.warn("{} ..... NO Filter XSL defind!!!, Generated XML wouldn't be transformed!",this.handleName);
 		}
-		
+			removeEmptyTransformer2.initTransformer();
 	}
 	
 	/* (non-Javadoc)
@@ -207,7 +209,11 @@ public class VzHandle implements Handle {
 			
 			
 			String xmlMessage = XMLHandle.makeXMLMessage(attrabuteForXMLMap, templateXML,this.transformer);
+			 xmlMessage = removeEmptyTransformer2.xmlFilter(xmlMessage);
 			if(xmlMessage!=null){
+				logger.info("Format XML....");
+				xmlMessage = XMLHandle.XMLformat(xmlMessage);
+				
 				imfMessage.setXmlMessage(xmlMessage.trim());
 			}
 			imfMessage.setFlightNumber(fxbean.getFlightIdentity());

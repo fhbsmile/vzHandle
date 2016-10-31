@@ -37,9 +37,12 @@ public class XMLHandle {
 
 		            }else{
 		            for (Element e : list1) {
-		                 if(e.getTextTrim().contains("@") || e.getTextTrim().equals("")){
+		            	String txt = e.getTextTrim();
+		            	//logger.info("txt:{}",txt);
+		                 if(txt.contains("@") || txt.equals("")){
 		                 e.getParent().remove(e);
 		                 }
+
 		            }
 		            }
 		           
@@ -79,12 +82,12 @@ public class XMLHandle {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				xmlMessage = RemoveEmptyTransformer.xmlFilter(xmlMessage);
-				xmlMessage = XMLHandle.XMLformat(xmlMessage);
+				//xmlMessage = RemoveEmptyTransformer.xmlFilter(xmlMessage);
+				//xmlMessage = XMLHandle.XMLformat(xmlMessage);
 				
 				
 				//插入数据库
-				logger.info("XML ready:\n{}",xmlMessage);
+				//logger.info("XML ready:\n{}",xmlMessage);
 			 }
 		return xmlMessage;
 	}
@@ -134,4 +137,6 @@ public class XMLHandle {
 				return out.toString();
 				 
 			} 
+	   
+
 }

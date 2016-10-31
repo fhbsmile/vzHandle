@@ -25,16 +25,16 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RemoveEmptyTransformer {
-	private static final Logger     logger               = LoggerFactory.getLogger(RemoveEmptyTransformer.class);
+public class RemoveEmptyTransformer2 {
+	private static final Logger     logger               = LoggerFactory.getLogger(RemoveEmptyTransformer2.class);
 	
-	private static String xslName = "remove_empty_nodes.xsl";
-	  private static Transformer transformer;
-	  private static URL urlFilterXSL = ConfigurationUtils.locate(xslName);
-	  private static String xsl = null;
-	  private static Source xslSource;
+	  private  String xslName = "remove_empty_nodes.xsl";
+	  private  Transformer transformer;
+	  private  URL urlFilterXSL = ConfigurationUtils.locate(xslName);
+	  private  String xsl = null;
+	  private  Source xslSource;
 
-	  public static String xmlFilter(String xml)
+	  public  String xmlFilter(String xml)
 	  {
 		logger.info("Orignal Xml: \n{}", xml);
 	    Source xmlInput = new StreamSource(new StringReader(xml));
@@ -50,7 +50,7 @@ public class RemoveEmptyTransformer {
 	    logger.info("After filter: \n{}", result);
 	    return result;
 	  }
-	  public static String xmlFilter2(String xml)
+	  public  String xmlFilter2(String xml)
 	  {
 	        String formattedOutput = "";  
 	        try {  
@@ -65,33 +65,35 @@ public class RemoveEmptyTransformer {
 	        }  
 	        return formattedOutput;  
 	  }
-	  static
-	  {
-	    try
-	    {
-	      xsl = IOUtils.toString(urlFilterXSL, "utf-8");
-	      logger.info("Loading  Filter XSL Success!");
-	      logger.info("\n{}", xsl);
-	    }
-	    catch (IOException e) {
-	      e.printStackTrace();
-	      logger.error("Loading  Filter XSL Failed!!!,System exit!!");
-	      logger.error(e.getMessage(), e);
-	      System.exit(0);
-	    }
+	  
+	  public void initTransformer(){
 
-	    xslSource = new StreamSource(new StringReader(xsl));
-	    try {
-	      transformer = TransformerFactory.newInstance().newTransformer(xslSource);
-	      transformer.setOutputProperty("indent", "yes");
-	    }
-	    catch (TransformerConfigurationException e) {
-	      e.printStackTrace();
-	      System.exit(0);
-	    }
-	    catch (TransformerFactoryConfigurationError e) {
-	      e.printStackTrace();
-	      System.exit(0);
-	    }
+		    try
+		    {
+		      xsl = IOUtils.toString(urlFilterXSL, "utf-8");
+		      logger.info("Loading  Filter XSL Success!");
+		      logger.info("\n{}", xsl);
+		    }
+		    catch (IOException e) {
+		      e.printStackTrace();
+		      logger.error("Loading  Filter XSL Failed!!!,System exit!!");
+		      logger.error(e.getMessage(), e);
+		      System.exit(0);
+		    }
+
+		    xslSource = new StreamSource(new StringReader(xsl));
+		    try {
+		      transformer = TransformerFactory.newInstance().newTransformer(xslSource);
+		      transformer.setOutputProperty("indent", "yes");
+		    }
+		    catch (TransformerConfigurationException e) {
+		      e.printStackTrace();
+		      System.exit(0);
+		    }
+		    catch (TransformerFactoryConfigurationError e) {
+		      e.printStackTrace();
+		      System.exit(0);
+		    }
 	  }
+
 }

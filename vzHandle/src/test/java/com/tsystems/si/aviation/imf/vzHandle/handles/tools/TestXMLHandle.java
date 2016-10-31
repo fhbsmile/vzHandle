@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.dom4j.DocumentException;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestRemoveEmptyTransformer {
-	private static final Logger     logger               = LoggerFactory.getLogger(TestRemoveEmptyTransformer.class);
+public class TestXMLHandle {
+	private static final Logger     logger               = LoggerFactory.getLogger(TestXMLHandle.class);
 
 
 	@Test
@@ -24,7 +25,13 @@ public class TestRemoveEmptyTransformer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String nn = RemoveEmptyTransformer.xmlFilter2(badstring);
+		String nn=null;
+		try {
+			nn = XMLHandle.rmNoUseAndEmptyNode(badstring);
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		logger.info("result:{}",nn);
 	}
 }
