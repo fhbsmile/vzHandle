@@ -18,7 +18,7 @@ import org.springframework.context.annotation.ImportResource;
 
 
 @Configuration
-@ImportResource({"classpath:applicationContext.xml"})
+@ImportResource({"classpath:applicationContext2.xml"})
 public class VZConfig {
        
 

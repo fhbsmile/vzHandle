@@ -14,6 +14,7 @@ package com.tsystems.si.aviation.imf.vzHandle.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -32,7 +33,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tsystems.si.aviation.imf.vzHandle.db.bean.Flight;
+import com.tsystems.si.aviation.imf.vzHandle.db.bean.OrgMessage;
 import com.tsystems.si.aviation.imf.vzHandle.db.service.FlightServiceI;
+import com.tsystems.si.aviation.imf.vzHandle.db.service.OrgMessageServiceI;
 import com.tsystems.si.aviation.imf.vzHandle.handles.tools.TelexConstant;
 import com.tsystems.si.aviation.imf.vzHandle.handles.tools.VzFlightMessageOperator;
 
@@ -46,6 +49,8 @@ public class VZController {
 	private FlightServiceI flightService;
 	@Autowired
 	private VzFlightMessageOperator vzFlightMessageOperator;
+	@Autowired
+	private OrgMessageServiceI orgMessageServiceI;
 	//@RequestMapping(value="/putFlight",produces={MediaType.APPLICATION_JSON_VALUE})
 	@RequestMapping(value="/putFlight")
 	public void putFlight(HttpServletRequest request, HttpServletResponse response)
@@ -83,7 +88,7 @@ public class VZController {
 	
 	}
 	
-	@RequestMapping(value="/GetFlight" , method = RequestMethod.POST)
+	@RequestMapping(value="/GetFlight2" , method = RequestMethod.POST)
 	public void getFlight2(HttpServletRequest request, HttpServletResponse response)
 	{
 		logger.info("----------FlightController----------- ");
@@ -173,7 +178,55 @@ public class VZController {
 
 	
 	}
+	@RequestMapping(value="/GetFlight" , method = RequestMethod.POST)
+	public void getFlight3(HttpServletRequest request, HttpServletResponse response)
+	{
+		logger.info("----------FlightController----------- ");
+		logger.info("ContentLength:{}",request.getContentLength());
+		logger.info("ContentType:{}",request.getContentType());
+
+		try {		
+			request.setCharacterEncoding("UTF-8"); 
+
+			List<String> ls = new ArrayList<String>();
+			for (Enumeration<String> e = request.getParameterNames(); e.hasMoreElements();)
+			{
+				ls.add(e.nextElement());
+			}
+		    if(!ls.isEmpty()){
+		    	String flightInfo = ls.get(0);
+		    	logger.info("Received message>>>>>>>>>>>>>>>>>>Msg:{}",flightInfo);	
+				JSONObject jb = JSON.parseObject(flightInfo);
+				String depStop = jb.getString("FlightDepcode");
+				String arrStop = jb.getString("FlightArrcode");
+				String direction = getDrection(depStop,arrStop);
+				if(direction==null){
+					logger.info("Ignored,No BaseStop, {}-{}",new Object[]{depStop,arrStop});
+				}else{
+					OrgMessage orgMessage = new OrgMessage();
+					orgMessage.setContent(flightInfo);
+					orgMessage.setCreateDateTime(new Date());
+					orgMessage.setOwner("VZ");
+					orgMessage.setStatus("U");
+					orgMessage.setType("VZDY");
+					orgMessageServiceI.saveOrUpdate(orgMessage);
+					logger.info("Save message to DataBase success.");	
+				}
+		    }else{
+		    	logger.info("Received message is null");	
+		    }
+			
+			response.setCharacterEncoding("UTF-8");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.write("success");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error(e.getMessage(), e);
+		}
+
 	
+	}
 	public String getDrection(String depatureStopIATA,String arrivalStopIATA){
 		String direction=null;
 		if(depatureStopIATA==null || arrivalStopIATA==null){

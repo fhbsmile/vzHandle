@@ -23,11 +23,12 @@
     <import resource="StcDictionary.xml"/>
      <import resource="AirlineDictionary.xml"/>
      <import resource="AirportDictionary.xml"/>
+     <import resource="orgParseAction.xml"/>
    
     <bean id="vzHandle" class="com.tsystems.si.aviation.imf.vzHandle.handles.vz.VzHandle" init-method="initHandle">
     	<property name="handleName" value="VZHandle"></property>
     	<property name="handleMode" value="PRD"></property>
     </bean>
      <bean id="vzFlightMessageOperator" class="com.tsystems.si.aviation.imf.vzHandle.handles.tools.VzFlightMessageOperator"></bean>
-<bean id="vzFlightMessageOperator2" class="com.tsystems.si.aviation.imf.vzHandle.handles.tools.VzFlightMessageOperator2"></bean>
+     <bean id="vzFlightMessageOperator2" class="com.tsystems.si.aviation.imf.vzHandle.handles.tools.VzFlightMessageOperator2"></bean>
 </beans>
