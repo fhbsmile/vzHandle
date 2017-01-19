@@ -1,5 +1,6 @@
 package com.tsystems.si.aviation.imf.vzHandle.db.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +32,17 @@ public class OrgMessageServiceImpl implements OrgMessageServiceI {
 		params.put("status", status);
 		params.put("owner", owner);
 		String sql = "from OrgMessage f where f.status = :status and f.owner = :owner order by f.id asc";
+		List<OrgMessage> orgMessages= orgMessageDao.find(sql, params);
+		return orgMessages;
+	}
+	@Override
+	public List<OrgMessage> findOrgMessageByStatusAndOwerAndCreateDateTimeAfter(String status, String owner,Date createDateTimeAfter) {
+		// TODO Auto-generated method stub
+		HashMap<String,Object> params = new HashMap<String,Object>();
+		params.put("status", status);
+		params.put("owner", owner);
+		params.put("createDateTimeAfter", createDateTimeAfter);
+		String sql = "from OrgMessage f where f.createDateTime > :createDateTimeAfter and f.status = :status and f.owner = :owner order by f.id asc";
 		List<OrgMessage> orgMessages= orgMessageDao.find(sql, params);
 		return orgMessages;
 	}
