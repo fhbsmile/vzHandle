@@ -32,7 +32,7 @@ private static final Logger     logger               = LoggerFactory.getLogger(V
 	
 	public void parse(){
 		Calendar cnow = Calendar.getInstance();
-		cnow.add(Calendar.HOUR, -12);
+		cnow.add(Calendar.HOUR, -2);
 		 Date creatDateTimeAfter = cnow.getTime();
 		 List<OrgMessage> orgMessages =orgMessageServiceI.findOrgMessageByStatusAndOwerAndCreateDateTimeAfter("U","VZ",creatDateTimeAfter);
 		 logger.info("UnParsed  OrgMessage Count:[{}]",new Object[]{orgMessages.size()});
