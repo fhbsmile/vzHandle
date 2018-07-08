@@ -294,6 +294,12 @@ public class VzFlightMessageOperator {
 				
 				logger.info("ImfMessage:\n{}",xmlMessage);
 				if(xmlMessage!=null){
+					//忽略对取消航班的任何更新
+					if(flight.getFlightStatus()=="X") {
+						logger.info("flight ststus:{},ingnore cancel flight update!",new Object[]{flight.getFlightStatus()});
+						comments.append(" ingnore cancel flight update!");
+						xmlMessage.setStatus("N");	
+					}
 					xmlMessage.setOwner("VZ");
 					xmlMessage.setOrgMessage(orgMessage);
 					imfMessageSet.add(xmlMessage);
@@ -461,6 +467,12 @@ public class VzFlightMessageOperator {
 
                 logger.info("ImfMessage:\n{}",xmlMessage);
 				if(xmlMessage!=null){
+					//忽略对取消航班的任何更新
+						if(flight.getFlightStatus()=="X") {
+							logger.info("flight ststus:{},ingnore cancel flight update!",new Object[]{flight.getFlightStatus()});
+							comments.append(" ingnore cancel flight update!");
+							xmlMessage.setStatus("N");	
+						}
 					xmlMessage.setOwner("VZ");
 					xmlMessage.setOrgMessage(orgMessage);
 					imfMessageSet.add(xmlMessage);
