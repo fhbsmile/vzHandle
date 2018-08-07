@@ -424,6 +424,11 @@ public class VzFlightMessageOperator2 {
 					comments.append("update ATOT:").append(depStopActualTakeOffDateTimeString).append(System.lineSeparator());
 					fxbean.setActualTakeOffDateTime(depStopActualTakeOffDateTime);
 					fxbean.setXmlStatus(vzHandle.getStatusMod());
+					if(flight.getActualGateEndDateTime()==null) {
+						fxbean.setXmlStatus("N");
+						logger.info("ActualGateEndDateTime is null, wouldn't send ATOT.");
+						comments.append("ActualGateEndDateTime is null, wouldn't send ATOT.").append(System.lineSeparator());
+					}
 					xmlMessage =vzHandle.createImfMessage(fxbean);
 					
 				}else if(status.equalsIgnoreCase("DEL")){
