@@ -259,9 +259,9 @@ public class VzFlightMessageOperator2 {
 					logger.info("Message ststus:{},update ALDT:{}",new Object[]{status,arrStopActualLandingDateTimeString});
 					comments.append("Update ALDT:").append(arrStopActualLandingDateTimeString).append(System.lineSeparator());
 					fxbean.setActualLandingDateTime(arrStopActualLandingDateTime);
-					comments.append("Do not Update ALDT!By WuYiDong's suggestion").append(System.lineSeparator());
-					fxbean.setXmlStatus("N");
-					//fxbean.setXmlStatus(vzHandle.getStatusMod());
+					//comments.append("Do not Update ALDT!By WuYiDong's suggestion").append(System.lineSeparator());
+					//fxbean.setXmlStatus("N");
+					fxbean.setXmlStatus(vzHandle.getStatusMod());
 					xmlMessage =vzHandle.createImfMessage(fxbean);
 					
 				}else if(status.equalsIgnoreCase("DEL")){
